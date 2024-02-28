@@ -17,7 +17,7 @@ void main() async {
     QueueSave queueSave = QueueSave();
     final queue = [
       Board(
-          title: 'Real-time Trackinggg',
+          title: 'Real-time Tracking',
           subTitle:
               'Track your packages/items from the comfort of your home till final destination',
           path: 'third_board',
