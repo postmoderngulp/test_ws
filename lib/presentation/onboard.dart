@@ -60,7 +60,7 @@ class SubOnBoard extends StatelessWidget {
                   child: model.item != null && model.item!.path == 'third_board'
                       ? const SignUp()
                       : const Row(
-                          children: [Skip(), Spacer(), Next()],
+                          children: [Skip(), Spacer(), NextButton()],
                         ),
                 ),
               ],
@@ -94,8 +94,8 @@ class Skip extends StatelessWidget {
   }
 }
 
-class Next extends StatelessWidget {
-  const Next({super.key});
+class NextButton extends StatelessWidget {
+  const NextButton({super.key});
 
   @override
   Widget build(BuildContext context) {
