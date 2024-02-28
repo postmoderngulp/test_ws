@@ -17,10 +17,10 @@ void main() async {
     QueueSave queueSave = QueueSave();
     final queue = [
       Board(
-          title: 'Real-time Tracking',
+          title: 'Flexible Payment',
           subTitle:
-              'Track your packages/items from the comfort of your home till final destination',
-          path: 'third_board',
+              'Different modes of payment either before and after delivery without stress',
+          path: 'second_board',
           width: 300,
           height: 150),
     ];
@@ -36,10 +36,10 @@ void main() async {
     expect(
       el,
       Board(
-          title: 'Real-time Tracking',
+          title: 'Flexible Payment',
           subTitle:
-              'Track your packages/items from the comfort of your home till final destination',
-          path: 'third_board',
+              'Different modes of payment either before and after delivery without stress',
+          path: 'second_board',
           width: 300,
           height: 150),
     );
@@ -49,10 +49,10 @@ void main() async {
     QueueSave queueSave = QueueSave();
     final queue = [
       Board(
-          title: 'Real-time Tracking',
+          title: 'Flexible Payment',
           subTitle:
-              'Track your packages/items from the comfort of your home till final destination',
-          path: 'third_board',
+              'Different modes of payment either before and after delivery without stress',
+          path: 'second_board',
           width: 300,
           height: 150),
     ];
