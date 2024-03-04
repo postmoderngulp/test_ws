@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
@@ -99,6 +98,7 @@ class EmailField extends StatelessWidget {
       width: 342.w,
       height: 44.h,
       child: TextField(
+        controller: model.controller,
         onChanged: (value) {
           model.email = value;
           model.setEmail();
@@ -108,7 +108,27 @@ class EmailField extends StatelessWidget {
           hintText: '***********@mail.com',
           hintStyle: FontStyle.labelField,
           border: OutlineInputBorder(
-            borderSide: const BorderSide(color: colors.gray2),
+            borderSide: BorderSide(color: model.controller.text.isEmpty || model.emailVal ?  colors.gray2 : colors.error),
+            borderRadius: BorderRadius.circular(4),
+          ),
+          errorBorder:  OutlineInputBorder(
+            borderSide: BorderSide(color:  model.controller.text.isEmpty ||model.emailVal ?  colors.gray2 : colors.error),
+            borderRadius: BorderRadius.circular(4),
+          ),
+          enabledBorder:  OutlineInputBorder(
+            borderSide: BorderSide(color: model.controller.text.isEmpty || model.emailVal ?  colors.gray2 : colors.error),
+            borderRadius: BorderRadius.circular(4),
+          ),
+          focusedBorder:  OutlineInputBorder(
+            borderSide: BorderSide(color:  model.controller.text.isEmpty || model.emailVal ?  colors.gray2 : colors.error),
+            borderRadius: BorderRadius.circular(4),
+          ),
+          disabledBorder:  OutlineInputBorder(
+            borderSide: BorderSide(color:  model.controller.text.isEmpty || model.emailVal ?  colors.gray2 : colors.error),
+            borderRadius: BorderRadius.circular(4),
+          ),
+          focusedErrorBorder:  OutlineInputBorder(
+            borderSide: BorderSide(color:  model.controller.text.isEmpty || model.emailVal ?  colors.gray2 : colors.error),
             borderRadius: BorderRadius.circular(4),
           ),
 

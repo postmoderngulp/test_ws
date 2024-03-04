@@ -1,17 +1,12 @@
-
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
-import 'package:test_ws/domain/forgot_model.dart';
 import 'package:test_ws/presentation/forgot.dart';
 import 'package:test_ws/presentation/sign_up.dart';
 import 'package:test_ws/presentation/style/colors.dart';
 import 'package:test_ws/presentation/style/font.dart';
-
 import '../domain/sign_in_model.dart';
-import 'Home.dart';
 
 class SignIn extends StatelessWidget {
   const SignIn({super.key});
@@ -27,9 +22,34 @@ class SubSignIn extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final model = context.watch<SignInModel>();
+    if (model.connective == 'none'){
+      WidgetsBinding.instance.addPostFrameCallback((_) { 
+        showDialog(context: context, builder: (context) => AlertDialog(
+          title: Text('No internet'),
+          actions: [
+            ElevatedButton(onPressed: () => Navigator.of(context).pop(), child: Text('Back'))
+          ],
+        ));
+      });
+    }
+    if (model.error != null){
+      WidgetsBinding.instance.addPostFrameCallback((_) { 
+        showDialog(context: context, builder: (context) => AlertDialog(
+          title: Text("${model.error}"),
+          actions: [
+            ElevatedButton(onPressed: () {
+              model.error = null;
+              Navigator.of(context).pop();
+            } , child: Text('Back'))
+          ],
+        ));
+      });
+    }
     return SafeArea(child: Scaffold(
       resizeToAvoidBottomInset: false,
       body: Padding(
+
         padding:  EdgeInsets.symmetric(horizontal: 24.w),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -76,7 +96,9 @@ class SubSignIn extends StatelessWidget {
               ),
             ),
             SizedBox(height: 8.h,),
-            Center(child: SvgPicture.asset('assets/image/google.svg')),
+            GestureDetector(
+              onTap: () => model.googleSignIn(context),
+              child: Center(child: SvgPicture.asset('assets/image/google.svg'))),
             SizedBox(height: 28.h,),
           ],
         ),
@@ -90,7 +112,7 @@ class Remember extends StatelessWidget {
   const Remember({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context) {  
     final model = context.watch<SignInModel>();
     return Row(
       crossAxisAlignment: CrossAxisAlignment.center,
@@ -98,7 +120,7 @@ class Remember extends StatelessWidget {
         SizedBox(
           width: 14.w,
           height: 14.h,
-          child: Checkbox(value: model.isCheck, onChanged: (val) => model.setCheck(),activeColor: colors.main,checkColor: Colors.white,side: BorderSide(color: colors.main),),),
+          child: Checkbox(value: model.isCheck, onChanged: (val) => model.savePassword(),activeColor: colors.main,checkColor: Colors.white,side: const BorderSide(color: colors.gray2),),),
         SizedBox(width: 4.w,),
         Text(
           'Remember password',
@@ -135,8 +157,13 @@ class LogInButton extends StatelessWidget {
                   shape: MaterialStatePropertyAll(RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(4.69))),
                   elevation: const MaterialStatePropertyAll(0)),
-              onPressed: () =>  model.emailVal && model.passwordVal  ? Navigator.of(context).push(MaterialPageRoute(builder: (context) => Home())) : null,
-              child: Text('Log In', style: FontStyle.next)));
+              onPressed: () =>  model.emailVal && model.passwordVal  ?  model.isLoad ? null :{
+      model.setLoad(),
+      model.signIn(context)} : null,
+              child: model.isLoad ? SizedBox(
+      width: 30.w,
+      height: 30.h,
+      child: const CircularProgressIndicator(color: Colors.white,)) : Text('Log In', style: FontStyle.next)));
   }
 }
 
@@ -152,6 +179,7 @@ class EmailField extends StatelessWidget {
       width: 342.w,
       height: 44.h,
       child: TextField(
+        controller: model.controller,
         onChanged: (value) {
           model.email = value;
           model.setEmail();
@@ -161,7 +189,27 @@ class EmailField extends StatelessWidget {
           hintText: '***********@mail.com',
           hintStyle: FontStyle.labelField,
           border: OutlineInputBorder(
-            borderSide: const BorderSide(color: colors.gray2),
+            borderSide: BorderSide(color: model.controller.text.isEmpty || model.emailVal ?  colors.gray2 : colors.error),
+            borderRadius: BorderRadius.circular(4),
+          ),
+          errorBorder:  OutlineInputBorder(
+            borderSide: BorderSide(color:  model.controller.text.isEmpty ||model.emailVal ?  colors.gray2 : colors.error),
+            borderRadius: BorderRadius.circular(4),
+          ),
+          enabledBorder:  OutlineInputBorder(
+            borderSide: BorderSide(color: model.controller.text.isEmpty || model.emailVal ?  colors.gray2 : colors.error),
+            borderRadius: BorderRadius.circular(4),
+          ),
+          focusedBorder:  OutlineInputBorder(
+            borderSide: BorderSide(color:  model.controller.text.isEmpty || model.emailVal ?  colors.gray2 : colors.error),
+            borderRadius: BorderRadius.circular(4),
+          ),
+          disabledBorder:  OutlineInputBorder(
+            borderSide: BorderSide(color:  model.controller.text.isEmpty || model.emailVal ?  colors.gray2 : colors.error),
+            borderRadius: BorderRadius.circular(4),
+          ),
+          focusedErrorBorder:  OutlineInputBorder(
+            borderSide: BorderSide(color:  model.controller.text.isEmpty || model.emailVal ?  colors.gray2 : colors.error),
             borderRadius: BorderRadius.circular(4),
           ),
 

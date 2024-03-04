@@ -23,6 +23,7 @@ class SubNewPassword extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SafeArea(child: Scaffold(
+      resizeToAvoidBottomInset: false,
       body: Padding(
         padding:  EdgeInsets.symmetric(horizontal: 24.w),
         child: Column(

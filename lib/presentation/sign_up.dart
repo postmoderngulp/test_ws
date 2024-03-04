@@ -1,5 +1,6 @@
-import 'package:flutter/cupertino.dart';
+
 import 'package:flutter/material.dart';
+import 'package:flutter_pdfview/flutter_pdfview.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
@@ -23,6 +24,30 @@ class SubSignUp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final model  = context.watch<SignUpModel>();
+    if (model.connective == 'none'){
+      WidgetsBinding.instance.addPostFrameCallback((_) { 
+        showDialog(context: context, builder: (context) => AlertDialog(
+          title: Text('No internet'),
+          actions: [
+            ElevatedButton(onPressed: () => Navigator.of(context).pop(), child: Text('Back'))
+          ],
+        ));
+      });
+    }
+    if (model.error != null){
+      WidgetsBinding.instance.addPostFrameCallback((_) { 
+        showDialog(context: context, builder: (context) => AlertDialog(
+          title: Text("${model.error}"),
+          actions: [
+            ElevatedButton(onPressed: () {
+              model.error = null;
+              Navigator.of(context).pop();
+            } , child: Text('Back'))
+          ],
+        ));
+      });
+    }
     return SafeArea(child: Scaffold(
       body: SingleChildScrollView(
         physics: const BouncingScrollPhysics(),
@@ -87,7 +112,9 @@ class SubSignUp extends StatelessWidget {
                 ),
               ),
               SizedBox(height: 8.h,),
-              Center(child: SvgPicture.asset('assets/image/google.svg')),
+              GestureDetector(
+                onTap: () => model.googleSignIn(context),
+                child: Center(child: SvgPicture.asset('assets/image/google.svg'))),
               SizedBox(height: 28.h,),
             ],
           ),
@@ -116,9 +143,30 @@ class NameField extends StatelessWidget {
           hintText: 'Ivanov Ivan',
           hintStyle: FontStyle.labelField,
           border: OutlineInputBorder(
-            borderSide: const BorderSide(color: colors.gray),
+            borderSide: const BorderSide(color: colors.gray2),
             borderRadius: BorderRadius.circular(4),
           ),
+          errorBorder:  OutlineInputBorder(
+            borderSide: const BorderSide(color: colors.gray2),
+            borderRadius: BorderRadius.circular(4),
+          ),
+          enabledBorder:  OutlineInputBorder(
+            borderSide: const BorderSide(color: colors.gray2),
+            borderRadius: BorderRadius.circular(4),
+          ),
+          focusedBorder:  OutlineInputBorder(
+            borderSide: const BorderSide(color: colors.gray2),
+            borderRadius: BorderRadius.circular(4),
+          ),
+          disabledBorder:  OutlineInputBorder(
+            borderSide: const BorderSide(color: colors.gray2),
+            borderRadius: BorderRadius.circular(4),
+          ),
+          focusedErrorBorder:  OutlineInputBorder(
+            borderSide: const BorderSide(color: colors.gray2),
+            borderRadius: BorderRadius.circular(4),
+          ),
+          
 
         ),
       ),
@@ -144,8 +192,13 @@ class RegisterButton extends StatelessWidget {
     shape: MaterialStatePropertyAll(RoundedRectangleBorder(
     borderRadius: BorderRadius.circular(4.69))),
     elevation: const MaterialStatePropertyAll(0)),
-    onPressed: () => model.isCheck &&   model.nameVal && model.confirmPasswordVal && model.emailVal && model.passwordVal && model.numberVal ? Navigator.of(context).push(MaterialPageRoute(builder: (context) => SignIn())) : null,
-    child: Text('Sign Up', style: FontStyle.next)));
+    onPressed: () => model.isCheck &&   model.nameVal && model.confirmPasswordVal && model.emailVal && model.passwordVal && model.numberVal ? model.isLoad ? null : {
+      model.setLoad(),
+      model.signUp(context)} : null,
+    child: model.isLoad ? SizedBox(
+      width: 30.w,
+      height: 30.h,
+      child: const CircularProgressIndicator(color: Colors.white,)) :  Text('Sign Up', style: FontStyle.next)));
   }
 }
 
@@ -164,10 +217,31 @@ class Terms extends StatelessWidget {
             width: 14.w,
             height: 14.h,
             child: Checkbox(value: model.isCheck, onChanged: (val) => model.setCheck(),activeColor: colors.main,checkColor: Colors.white,side: BorderSide(color: colors.main),),),
-        SizedBox(width: 14.w,),
-        SizedBox(
-            width: 271.w,
-            child: Text('By ticking this box, you agree to our Terms and conditions and private policy',textAlign: TextAlign.center,style: FontStyle.termsStyle,))
+        SizedBox(width: 18.w,),
+            Expanded(
+              child: GestureDetector(
+                onTap: () => Navigator.of(context).push(MaterialPageRoute(builder: (context) => PDFView(
+                enableSwipe: true,
+                swipeHorizontal: true,
+                autoSpacing: false,
+                pageFling: true,
+                pageSnap: true,
+                filePath: model.pdfPath,))),
+                child: RichText(
+                  textAlign: TextAlign.center,
+                  text: TextSpan(
+                  text: 'By ticking this box, you agree to our ',
+                  style: FontStyle.termsStyle,
+                  children: [
+                    TextSpan(
+                      text: 'Terms and conditions and private policy',
+                      style: FontStyle.termsWarnStyle
+                    )
+                  ]
+                )),
+              ),
+            ),
+            SizedBox(width: 40.w,)
       ],
     );
   }
@@ -185,6 +259,7 @@ class NumberField extends StatelessWidget {
       width: 342.w,
       height: 44.h,
       child: TextField(
+        keyboardType: TextInputType.number,
         onChanged: (value) {
           model.number = value;
           model.setNumber();
@@ -194,15 +269,34 @@ class NumberField extends StatelessWidget {
           hintText: '+7(999)999-99-99',
           hintStyle: FontStyle.labelField,
           border: OutlineInputBorder(
-            borderSide: BorderSide(color: colors.gray),
+            borderSide: BorderSide(color: colors.gray2),
             borderRadius: BorderRadius.circular(4),
           ),
+          errorBorder:  OutlineInputBorder(
+            borderSide: const BorderSide(color: colors.gray2),
+            borderRadius: BorderRadius.circular(4),
+          ),
+          enabledBorder:  OutlineInputBorder(
+            borderSide: const BorderSide(color: colors.gray2),
+            borderRadius: BorderRadius.circular(4),
+          ),
+          focusedBorder:  OutlineInputBorder(
+            borderSide: const BorderSide(color: colors.gray2),
+            borderRadius: BorderRadius.circular(4),
+          ),
+          disabledBorder:  OutlineInputBorder(
+            borderSide: const BorderSide(color: colors.gray2),
+            borderRadius: BorderRadius.circular(4),
+          ),
+
 
         ),
       ),
     );
   }
-}class EmailField extends StatelessWidget {
+}
+
+class EmailField extends StatelessWidget {
   const EmailField({super.key});
 
   @override
@@ -212,6 +306,7 @@ class NumberField extends StatelessWidget {
       width: 342.w,
       height: 44.h,
       child: TextField(
+        controller: model.controller,
         onChanged: (value) {
           model.email = value;
           model.setEmail();
@@ -221,7 +316,27 @@ class NumberField extends StatelessWidget {
           hintText: '***********@mail.com',
           hintStyle: FontStyle.labelField,
           border: OutlineInputBorder(
-            borderSide: BorderSide(color: colors.gray),
+            borderSide: BorderSide(color: model.controller.text.isEmpty || model.emailVal ?  colors.gray2 : colors.error),
+            borderRadius: BorderRadius.circular(4),
+          ),
+          errorBorder:  OutlineInputBorder(
+            borderSide: BorderSide(color:  model.controller.text.isEmpty ||model.emailVal ?  colors.gray2 : colors.error),
+            borderRadius: BorderRadius.circular(4),
+          ),
+          enabledBorder:  OutlineInputBorder(
+            borderSide: BorderSide(color: model.controller.text.isEmpty || model.emailVal ?  colors.gray2 : colors.error),
+            borderRadius: BorderRadius.circular(4),
+          ),
+          focusedBorder:  OutlineInputBorder(
+            borderSide: BorderSide(color:  model.controller.text.isEmpty || model.emailVal ?  colors.gray2 : colors.error),
+            borderRadius: BorderRadius.circular(4),
+          ),
+          disabledBorder:  OutlineInputBorder(
+            borderSide: BorderSide(color:  model.controller.text.isEmpty || model.emailVal ?  colors.gray2 : colors.error),
+            borderRadius: BorderRadius.circular(4),
+          ),
+          focusedErrorBorder:  OutlineInputBorder(
+            borderSide: BorderSide(color:  model.controller.text.isEmpty || model.emailVal ?  colors.gray2 : colors.error),
             borderRadius: BorderRadius.circular(4),
           ),
 
@@ -263,10 +378,25 @@ class PasswordField extends StatelessWidget {
           hintText: '**********',
           hintStyle: FontStyle.labelField,
           border: OutlineInputBorder(
-            borderSide: BorderSide(color: colors.gray),
+            borderSide: BorderSide(color: colors.gray2),
             borderRadius: BorderRadius.circular(4),
           ),
-
+          errorBorder:  OutlineInputBorder(
+            borderSide: const BorderSide(color: colors.gray2),
+            borderRadius: BorderRadius.circular(4),
+          ),
+          enabledBorder:  OutlineInputBorder(
+            borderSide: const BorderSide(color: colors.gray2),
+            borderRadius: BorderRadius.circular(4),
+          ),
+          focusedBorder:  OutlineInputBorder(
+            borderSide: const BorderSide(color: colors.gray2),
+            borderRadius: BorderRadius.circular(4),
+          ),
+          disabledBorder:  OutlineInputBorder(
+            borderSide: const BorderSide(color: colors.gray2),
+            borderRadius: BorderRadius.circular(4),
+          ),
         ),
       ),
     );
@@ -303,11 +433,26 @@ class ConfirmField extends StatelessWidget {
           hintText: '**********',
           hintStyle: FontStyle.labelField,
           border: OutlineInputBorder(
-            borderSide: BorderSide(color: colors.gray),
+            borderSide: const BorderSide(color: colors.gray2),
             borderRadius: BorderRadius.circular(4),
           ),
-
-        ),
+          errorBorder:  OutlineInputBorder(
+            borderSide: const BorderSide(color: colors.gray2),
+            borderRadius: BorderRadius.circular(4),
+          ),
+          enabledBorder:  OutlineInputBorder(
+            borderSide: const BorderSide(color: colors.gray2),
+            borderRadius: BorderRadius.circular(4),
+          ),
+          focusedBorder:  OutlineInputBorder(
+            borderSide: const BorderSide(color: colors.gray2),
+            borderRadius: BorderRadius.circular(4),
+          ),
+          disabledBorder:  OutlineInputBorder(
+            borderSide: const BorderSide(color: colors.gray2),
+            borderRadius: BorderRadius.circular(4),
+          ),
+        ),  
       ),
     );
   }

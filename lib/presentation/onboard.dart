@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
 import 'package:test_ws/domain/onboard_model.dart';
+import 'package:test_ws/presentation/sign_in.dart';
 import 'package:test_ws/presentation/style/colors.dart';
 import 'package:test_ws/presentation/style/font.dart';
 
@@ -32,25 +34,31 @@ class SubOnBoard extends StatelessWidget {
               color: colors.main,
             ))
           : Column(
-              mainAxisAlignment: MainAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                SizedBox(
-                  height: 66.h,
-                ),
                 SvgPicture.asset('assets/image/${model.item!.path}.svg'),
                 SizedBox(
                   height: 48.h,
                 ),
-                Text(
-                  model.item!.title,
-                  style: FontStyle.titleMain,
-                  textAlign: TextAlign.center,
+                SizedBox(
+                  width: 287.w,
+                  child: Text(
+                    model.item!.title,
+                    style: FontStyle.titleMain,
+                    textAlign: TextAlign.center,
+                  ),
                 ),
-                Text(
-                  model.item!.subTitle,
-                  style: FontStyle.labelMain,
-                  textAlign: TextAlign.center,
+                SizedBox(
+                  height: 5.h,
+                ),
+                SizedBox(
+                  width:271.w,
+                  child: Text(
+                    model.item!.subTitle,
+                    style: FontStyle.labelMain,
+                    textAlign: TextAlign.center,
+                  ),
                 ),
                 SizedBox(
                   height: 87.h,
@@ -147,9 +155,12 @@ class SignUpButton extends StatelessWidget {
             SizedBox(
               width: 1.w,
             ),
-            Text(
-              'Sign in',
-              style: FontStyle.labelSignUpMain,
+            GestureDetector(
+              onTap: () => Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context) => const SignIn()), (route) => false),
+              child: Text(
+                'Sign in',
+                style: FontStyle.labelSignUpMain,
+              ),
             ),
           ],
         ),

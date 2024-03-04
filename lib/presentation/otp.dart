@@ -1,10 +1,7 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
-import 'package:test_ws/domain/forgot_model.dart';
 import 'package:test_ws/domain/otp_model.dart';
-import 'package:test_ws/presentation/forgot.dart';
 import 'package:test_ws/presentation/new_password.dart';
 import 'package:test_ws/presentation/style/colors.dart';
 import 'package:test_ws/presentation/style/font.dart';
@@ -56,6 +53,7 @@ class CodeInput extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final model = context.watch<OtpModel>();
     return Padding(
       padding:  EdgeInsets.symmetric(horizontal:  24.w),
       child: Stack(
@@ -67,20 +65,26 @@ class CodeInput extends StatelessWidget {
               height: 32.h,
               decoration: BoxDecoration(
                 color: Colors.transparent,
-                border: Border.all(color: colors.gray2)
+                border: Border.all(color:  model.code.length > index ? colors.main : colors.gray2)
               ),
+              child:  model.code.length > index   ? Center(child: Text(model.code[index],style: FontStyle.codeStyle,)) : const Text(''),
             ),
           )),
         ),
         TextField(
+          keyboardType: TextInputType.number,
+          onChanged: (value) {
+            model.setCode(value);
+            model.setVal();
+          },
           autofocus: true,
           showCursor: false,
-          style: TextStyle(
+          style: const TextStyle(
             decoration: TextDecoration.none,
             color: Colors.transparent,
             decorationThickness: 0
           ),
-          decoration: InputDecoration(
+          decoration: const InputDecoration(
             border: InputBorder.none,
 
           ),
@@ -110,8 +114,8 @@ class NewPassword extends StatelessWidget {
                     shape: MaterialStatePropertyAll(RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(4.69))),
                     elevation: const MaterialStatePropertyAll(0)),
-                onPressed: () =>  model.codeVal  ? null : Navigator.of(context).push(MaterialPageRoute(builder: (context) => NewPasswordWidget())),
-                child: Text('Log In', style: FontStyle.next))),
+                onPressed: () =>  model.codeVal  ? Navigator.of(context).push(MaterialPageRoute(builder: (context) => NewPasswordWidget())) : null,
+                child: Text('Set New Password', style: FontStyle.next))),
       );
   }
 }
