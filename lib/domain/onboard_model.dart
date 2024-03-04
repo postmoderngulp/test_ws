@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:test_ws/entity/board.dart';
-import 'package:test_ws/presentation/Home.dart';
+import 'package:test_ws/presentation/sign_up.dart';
 import 'package:test_ws/repository/queue_save.dart';
 
 class OnBoardModel extends ChangeNotifier {
@@ -57,7 +57,7 @@ class OnBoardModel extends ChangeNotifier {
 
   void signUp(BuildContext context) {
     Navigator.of(context)
-        .push(MaterialPageRoute(builder: (context) => const Home()));
+        .pushAndRemoveUntil(MaterialPageRoute(builder: (context) => const SignUp()),(route) => false);
   }
 
   skip(BuildContext context) async {

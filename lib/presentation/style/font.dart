@@ -14,6 +14,47 @@ abstract class FontStyle {
       fontSize: 16.sp,
       fontFamily: 'Roboto',
       fontWeight: FontWeight.w400);
+  static TextStyle labelField = TextStyle(
+      color: colors.gray1,
+      fontSize: 14.sp,
+      fontFamily: 'Roboto',
+      fontWeight: FontWeight.w500);
+
+  static TextStyle Home = TextStyle(
+      color: colors.text4,
+      fontSize: 24.sp,
+      fontFamily: 'Roboto',
+      fontWeight: FontWeight.w400);
+  static TextStyle termsStyle = TextStyle(
+      color: colors.gray1,
+      fontSize: 12.sp,
+      fontFamily: 'Roboto',
+      fontWeight: FontWeight.w400);
+      static TextStyle termsWarnStyle = TextStyle(
+      color: colors.warning,
+      fontSize: 12.sp,
+      fontFamily: 'Roboto',
+      fontWeight: FontWeight.w400);
+  static TextStyle titleSign = TextStyle(
+      color: colors.text4,
+      fontSize: 24.sp,
+      fontFamily: 'Roboto',
+      fontWeight: FontWeight.w500);
+      static TextStyle codeStyle = TextStyle(
+      color: colors.text4,
+      fontSize: 14.sp,
+      fontFamily: 'Roboto',
+      fontWeight: FontWeight.w400);
+  static TextStyle subTitleSign = TextStyle(
+      color: colors.gray2,
+      fontSize: 14.sp,
+      fontFamily: 'Roboto',
+      fontWeight: FontWeight.w500);
+  static TextStyle resend = TextStyle(
+      color: colors.gray2,
+      fontSize: 14.sp,
+      fontFamily: 'Roboto',
+      fontWeight: FontWeight.w400);
   static TextStyle labelSignUp = TextStyle(
       color: colors.gray2,
       fontSize: 14.sp,
