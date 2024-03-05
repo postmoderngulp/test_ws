@@ -1,11 +1,9 @@
 import 'dart:convert';
-
 import 'package:connectivity/connectivity.dart';
 import 'package:crypto/crypto.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:test_ws/presentation/Home.dart';
-import 'package:test_ws/presentation/sign_in.dart';
 import 'package:test_ws/repository/supabase_service.dart';
 
 class SignInModel extends ChangeNotifier {

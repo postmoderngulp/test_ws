@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:test_ws/entity/board.dart';
+import 'package:test_ws/domain/entity/board.dart';
 import 'package:test_ws/presentation/sign_up.dart';
 import 'package:test_ws/repository/queue_save.dart';
 
