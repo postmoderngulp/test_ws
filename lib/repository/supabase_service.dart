@@ -2,20 +2,27 @@
 
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
+import 'package:test_ws/domain/entity/profile.dart';
 
 class SupabaseService {
   final supabase = Supabase.instance.client;
 
   Future<void> signUp (String email,String password,String number,String name,) async{
-    await supabase.auth.signUp(password: password,email: email);
+   final res = await supabase.auth.signUp(password: password,email: email);
     await supabase.from('profiles').insert({
       'name' : name,
       'number' : number,
       'role' : 'client',
-      'balance' : 1000000
+      'balance' : 1000000,
+      'user_id' : res.user!.id
     });
   }
 
+
+   Future<Profile> getProfile () async{
+     final src = await supabase.from('profiles').select().eq('user_id', supabase.auth.currentSession!.user.id);
+      return Profile.fromJson(src.first as String);
+  }
 
   Future<void> signIn (String email, String password) async{
     await supabase.auth.signInWithPassword(password: password,email: email);

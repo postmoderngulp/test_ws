@@ -1,7 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
@@ -27,6 +26,7 @@ class SubProfile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final model = context.watch<ProfileModel>();
     return Scaffold(
       appBar: PreferredSize(preferredSize: Size.fromHeight(63.h), child: AppBar(
         automaticallyImplyLeading: false,
@@ -83,7 +83,7 @@ class SubProfile extends StatelessWidget {
                 scale: 0.85,
                 child: CupertinoSwitch(
                 
-                  value: true, onChanged: (val){},activeColor: colors.main,),
+                  value: model.isDark, onChanged: (val){model.setDark(); },activeColor: colors.main,),
               )
             ],
           ),
@@ -128,9 +128,7 @@ class ServiceItem extends StatelessWidget {
         if(index == 2) {
           Navigator.of(context).push(MaterialPageRoute(builder: (context) =>  NotificationWidget()));
         }
-         if(index == 3) {
-          Navigator.of(context).push(MaterialPageRoute(builder: (context) =>  Payment()));
-        }
+         
 
       },
       child: Container(

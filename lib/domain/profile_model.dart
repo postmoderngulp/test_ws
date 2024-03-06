@@ -2,9 +2,32 @@
 
 import 'package:flutter/material.dart';
 import 'package:test_ws/domain/entity/service.dart';
+import 'package:test_ws/repository/supabase_service.dart';
 
 class ProfileModel extends ChangeNotifier {
   bool isDark =false;
+  String? name;
+  int? balance;
+
+
+  ProfileModel(){
+    _setup();
+    
+  }
+
+  void _setup() async{
+    SupabaseService service = SupabaseService();
+    final val = await service.getProfile();
+    name = val.name;
+    balance = val.balance;
+    notifyListeners();
+  }
+
+  void setDark (){
+
+    isDark = !isDark;
+    notifyListeners();
+  }
   List<Servicee> serviceList = [
     Servicee(title: 'Edit Profile',
     label: 'Name, phone no, address, email ...',

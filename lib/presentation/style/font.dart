@@ -9,6 +9,18 @@ abstract class FontStyle {
       fontFamily: 'Roboto',
       fontWeight: FontWeight.w700);
 
+      static TextStyle title2 = TextStyle(
+      color: colors.text4,
+      fontSize: 20.sp,
+      fontFamily: 'Roboto',
+      fontWeight: FontWeight.w500);
+
+   static TextStyle titleCard = TextStyle(
+      color: colors.text4,
+      fontSize: 16.sp,
+      fontFamily: 'Roboto',
+      fontWeight: FontWeight.w700);
+
         static TextStyle titleSend = TextStyle(
       color: colors.main,
       fontSize: 16.sp,
@@ -35,6 +47,11 @@ abstract class FontStyle {
  static TextStyle labelService = TextStyle(
       color: colors.gray2,
       fontSize: 10.sp,
+      fontFamily: 'Roboto',
+      fontWeight: FontWeight.w400);
+   static TextStyle labelCard = TextStyle(
+      color: colors.gray2,
+      fontSize: 12.sp,
       fontFamily: 'Roboto',
       fontWeight: FontWeight.w400);
 static TextStyle labelProfile = TextStyle(
@@ -69,12 +86,29 @@ static TextStyle labelProfile = TextStyle(
       fontWeight: FontWeight.w500);
  static TextStyle labelInfo = TextStyle(
       color: colors.gray1,
-      fontSize: 14.sp,
+      fontSize: 12.sp,
       fontFamily: 'Roboto',
       fontWeight: FontWeight.w400);
+
+ static TextStyle payd = TextStyle(
+      color: colors.error,
+      fontSize: 16.sp,
+      fontFamily: 'Roboto',
+      fontWeight: FontWeight.w500);
+ static TextStyle labelFieldDate = TextStyle(
+      color: colors.gray1,
+      fontSize: 10.sp,
+      fontFamily: 'Roboto',
+      fontWeight: FontWeight.w500);
+       static TextStyle get = TextStyle(
+      color: colors.good,
+      fontSize: 16.sp,
+      fontFamily: 'Roboto',
+      fontWeight: FontWeight.w500);
+
       static TextStyle labelInfoWarn = TextStyle(
       color: colors.warning,
-      fontSize: 14.sp,
+      fontSize: 12.sp,
       fontFamily: 'Roboto',
       fontWeight: FontWeight.w400);
   static TextStyle Home = TextStyle(
