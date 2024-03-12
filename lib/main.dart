@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
-import 'package:test_ws/presentation/navigation/navigate.dart';
+
+import 'presentation/navigation/navigate.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -21,7 +22,7 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         routes: service.routes,
         theme: ThemeData(colorScheme: ColorScheme.light(primary: Colors.white)),
-        initialRoute: service.initialroute,
+        initialRoute:  service.initialroute,
       ),
     );
   }

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:test_ws/presentation/style/colors.dart';
+
+import 'colors.dart';
 
 abstract class FontStyle {
   static TextStyle titleMain = TextStyle(
@@ -8,6 +9,18 @@ abstract class FontStyle {
       fontSize: 24.sp,
       fontFamily: 'Roboto',
       fontWeight: FontWeight.w700);
+
+ static TextStyle titleService = TextStyle(
+      color: colors.main,
+      fontSize: 16.sp,
+      fontFamily: 'Roboto',
+      fontWeight: FontWeight.w500);
+
+ static TextStyle labelDescService = TextStyle(
+      color: colors.text4,
+      fontSize: 7.45.sp,
+      fontFamily: 'Roboto',
+      fontWeight: FontWeight.w400);
 
       static TextStyle title2 = TextStyle(
       color: colors.text4,
@@ -79,6 +92,11 @@ static TextStyle labelProfile = TextStyle(
       fontSize: 16.sp,
       fontFamily: 'Roboto',
       fontWeight: FontWeight.w500);
+       static TextStyle labelSearch = TextStyle(
+      color: colors.gray2,
+      fontSize: 12.sp,
+      fontFamily: 'Roboto',
+      fontWeight: FontWeight.w400);
       static TextStyle titleSuccess = TextStyle(
       color: colors.text4,
       fontSize: 24.sp,
@@ -106,20 +124,55 @@ static TextStyle labelProfile = TextStyle(
       fontFamily: 'Roboto',
       fontWeight: FontWeight.w500);
 
+      static TextStyle titleCall = TextStyle(
+      color: colors.main,
+      fontSize: 18.sp,
+      fontFamily: 'Roboto',
+      fontWeight: FontWeight.w700);
+
+ static TextStyle titleNumber = TextStyle(
+      color: colors.gray2,
+      fontSize: 18.sp,
+      fontFamily: 'Roboto',
+      fontWeight: FontWeight.w700);
+
+
       static TextStyle labelInfoWarn = TextStyle(
       color: colors.warning,
       fontSize: 12.sp,
       fontFamily: 'Roboto',
       fontWeight: FontWeight.w400);
+      static TextStyle labelProfileWarn = TextStyle(
+      color: colors.warning,
+      fontSize: 14.sp,
+      fontFamily: 'Roboto',
+      fontWeight: FontWeight.w500);
   static TextStyle Home = TextStyle(
       color: colors.text4,
       fontSize: 24.sp,
       fontFamily: 'Roboto',
       fontWeight: FontWeight.w400);
 
+static TextStyle msg = TextStyle(
+      color: colors.text4,
+      fontSize: 12.sp,
+      fontFamily: 'Roboto',
+      fontWeight: FontWeight.w500);
+   static TextStyle labelMiniProfile = TextStyle(
+      color: colors.gray1,
+      fontSize: 12.sp,
+      fontFamily: 'Roboto',
+      fontWeight: FontWeight.w400);
   static TextStyle delivery = TextStyle(
       color: Colors.white,
       fontSize: 14.sp,
+      fontFamily: 'Roboto',
+      fontWeight: FontWeight.w500
+      
+      );
+      static TextStyle titleProfile = TextStyle(
+      color: Colors.white,
+      fontSize: 24.sp,
       fontFamily: 'Roboto',
       fontWeight: FontWeight.w500
       
@@ -172,6 +225,11 @@ static TextStyle labelProfile = TextStyle(
       fontSize: 14.sp,
       fontFamily: 'Roboto',
       fontWeight: FontWeight.w400);
+       static TextStyle titleMainMiniProfile = TextStyle(
+      color: colors.main,
+      fontSize: 14.sp,
+      fontFamily: 'Roboto',
+      fontWeight: FontWeight.w500);
   static TextStyle skip = TextStyle(
       color: colors.main,
       fontSize: 14.sp,
