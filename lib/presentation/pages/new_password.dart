@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
-import 'sign_in.dart';
-import '../style/colors.dart';
-import '../style/font.dart';
 
 import '../provider/new_password_model.dart';
+import '../style/colors.dart';
+import '../style/font.dart';
+import 'sign_in.dart';
 
 class NewPasswordWidget extends StatelessWidget {
   const NewPasswordWidget({super.key});

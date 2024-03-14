@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
-import '../pages/Home.dart';
-import '../../domain/entity/board.dart';
-import '../pages/sign_up.dart';
+
 import '../../data/repositoryimpl/queue_save.dart';
+import '../../domain/entity/board.dart';
+import '../pages/Home.dart';
+import '../pages/sign_up.dart';
 
 class OnBoardModel extends ChangeNotifier {
   Board? item;

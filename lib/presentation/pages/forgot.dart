@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
-import 'otp.dart';
-import 'sign_in.dart';
-import '../style/colors.dart';
-import '../style/font.dart';
 
 import '../provider/forgot_model.dart';
+import '../style/colors.dart';
+import '../style/font.dart';
+import 'otp.dart';
+import 'sign_in.dart';
 
 
 class Forgot extends StatelessWidget {

@@ -4,11 +4,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
+import 'package:yandex_mapkit/yandex_mapkit.dart';
+
 import '../provider/track_model.dart';
-import 'check_info.dart';
 import '../style/colors.dart';
 import '../style/font.dart';
-import 'package:yandex_mapkit/yandex_mapkit.dart';
+import 'check_info.dart';
 
 class Track extends StatelessWidget {
   const Track({super.key});

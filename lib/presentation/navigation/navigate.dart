@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import '../pages/Home.dart';
 
+import '../pages/Home.dart';
 import '../pages/onboard.dart';
 
 abstract class NavigateRoute {

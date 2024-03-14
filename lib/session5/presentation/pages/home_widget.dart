@@ -2,14 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
+import '../../../presentation/pages/send_package.dart' as send;
+
+import '../../../presentation/style/colors.dart';
+import '../../../presentation/style/font.dart';
 import '../../data/datasource/remote_data_source.dart';
 import '../../data/repositoryimpl/repositoryImpl.dart';
 import '../../domain/entities/moves.dart';
 import '../../domain/usecases/getProfileFromRepository.dart';
 import '../../domain/usecases/getProfilesFromRepository.dart';
-
-import '../../../presentation/style/colors.dart';
-import '../../../presentation/style/font.dart';
 import '../provider/home_notifier.dart';
 import 'chats.dart';
 
@@ -98,8 +99,9 @@ class _SubHomeWidgetState extends State<SubHomeWidget> {
               children: List.generate(moves.length, (index) =>  Padding(
                   padding:  EdgeInsets.only(right:  index == 0 ||  index == 2 ? 23.w : 0,bottom: 23.h),
                   child:  GestureDetector(
-                    onTap: () => Navigator.of(context).push(MaterialPageRoute(builder: (context) => MultiProvider(providers: [Provider.value(value: useCase)],
-                    child: ChatsWidget()))),
+                    onTap: () => index == 3  ? Navigator.of(context).push(MaterialPageRoute(builder: (context) => MultiProvider(providers: [Provider.value(value: useCase)],
+                    child: ChatsWidget()))) : index == 1 ? Navigator.of(context).push(MaterialPageRoute(builder: (context) => MultiProvider(providers: [Provider.value(value: useCase)],
+                    child: send.SendPackage()))) : null,
                     child: Container(
                           width: 159.w,
                           height: 159.h,

@@ -2,11 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:provider/provider.dart';
+
+import '../../../presentation/style/colors.dart';
+import '../../../presentation/style/font.dart';
 import '../../domain/usecases/getProfilesFromRepository.dart';
 import '../provider/chats_notifier.dart';
 import 'chat_rider.dart';
-import '../../../presentation/style/colors.dart';
-import '../../../presentation/style/font.dart';
 
 class ChatsWidget extends StatelessWidget {
   const ChatsWidget({super.key});

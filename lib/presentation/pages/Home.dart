@@ -2,12 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
+
 import '../../session5/data/datasource/remote_data_source.dart';
 import '../../session5/data/repositoryimpl/repositoryImpl.dart';
 import '../../session5/domain/usecases/getProfileFromRepository.dart';
 import '../../session5/presentation/pages/home_widget.dart';
-import 'profile.dart';
 import '../style/font.dart';
+import 'profile.dart';
 import 'track.dart';
 import 'wallet.dart';
 class Home extends StatefulWidget {
